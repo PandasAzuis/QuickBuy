@@ -1,10 +1,11 @@
 ﻿using QuickBuy.Domain.ValuableObject;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuickBuy.Domain.Entities
 {
-    public class Request
+    public class Request : Entity
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
@@ -20,11 +21,20 @@ namespace QuickBuy.Domain.Entities
         public string FullAddress { get; set; }
         public int NumAddress { get; set; }
 
-
-
         /// <summary>
         /// Request must have at least one item or many itens
         /// </summary>
-        public ICollection<ItemRequest> ItemRequests { get; set; }
+        public ICollection<OrderItems> OrderItems { get; set; }
+
+        public override void Validate()
+        {
+            ClearValidationMessages();
+
+            if (this.OrderItems.Any())
+                AddCritical("Order can't be without order item.");
+
+            if (string.IsNullOrEmpty(this.CEP))
+                AddCritical("CEP must be filled.");
+        }
     }
 }

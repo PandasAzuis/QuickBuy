@@ -1,11 +1,12 @@
-﻿using QuickBuy.Domain.Enumerated;
+﻿using QuickBuy.Domain.Entities;
+using QuickBuy.Domain.Enumerated;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace QuickBuy.Domain.ValuableObject
 {
-    public class FormOfPayment
+    public class FormOfPayment : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,7 +16,8 @@ namespace QuickBuy.Domain.ValuableObject
         {
             get { return Id == (int)TypeFormOfPaymentEnum.Undefined; }
         }
-        public bool IsBill {
+        public bool IsBill
+        {
             get { return Id == (int)TypeFormOfPaymentEnum.Bill; }
         }
         public bool IsCreditCard
@@ -25,6 +27,15 @@ namespace QuickBuy.Domain.ValuableObject
         public bool IsDeposity
         {
             get { return Id == (int)TypeFormOfPaymentEnum.Deposity; }
+        }
+
+        public override void Validate()
+        {
+            ClearValidationMessages();
+
+            if (Enum.IsDefined(typeof(TypeFormOfPaymentEnum), Id))
+                AddCritical("Form of payment not registred.");
+
         }
     }
 }

@@ -14,7 +14,7 @@ namespace QuickBuy.Domain.Entities
         public DateTime ExpectedDeliveryDate { get; set; }
 
         public int FormOfPaymentId { get; set; }
-        public FormOfPayment FormOfPayment { get; set; }
+        public virtual FormOfPayment FormOfPayment { get; set; }
 
         public string CEP { get; set; }
         public string Estate { get; set; }
@@ -25,7 +25,7 @@ namespace QuickBuy.Domain.Entities
         /// <summary>
         /// Request must have at least one item or many itens
         /// </summary>
-        public ICollection<OrderItems> OrderItems { get; set; }
+        public virtual ICollection<OrderItems> OrderItems { get; set; }
 
         public override void Validate()
         {

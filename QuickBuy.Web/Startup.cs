@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuickBuy.Domain.Contracts;
 using QuickBuy.Repository.Context;
+using QuickBuy.Repository.Repositories;
 
 namespace QuickBuy.Web
 {
@@ -15,8 +17,8 @@ namespace QuickBuy.Web
         public Startup(IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("config.json",optional:false,reloadOnChange:true);
-            
+            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
+
             Configuration = builder.Build();
         }
 
@@ -26,14 +28,16 @@ namespace QuickBuy.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
-            
+
             //services.AddControllersWithViews();
 
             var connectionString = Configuration.GetConnectionString("QuickBuyDB");
-            services.AddDbContext<QuickBuyContext>(option => 
+            services.AddDbContext<QuickBuyContext>(option =>
                 option.UseLazyLoadingProxies()
                 .UseMySql(connectionString, m =>
                     m.MigrationsAssembly("QuickBuy.Repository")));
+
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

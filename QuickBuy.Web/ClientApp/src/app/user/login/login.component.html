@@ -1,0 +1,56 @@
+<div class="text-center">
+  <form class="form-signin">
+
+    <h1 class="h4 mb-2 login">Client Login</h1>
+
+    <!-- The label will only be shown to screen readers (visually impaired)-->
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="email" id="inputEmail"
+           name="email" placeholder="Enter your E-mail"
+           class="form-control mb-2"
+           [ngClass]="{
+           'is-invalid': email.invalid && (email.dirty || email.touched),
+           'is-valid': email.valid && (email.dirty || email.touched)
+           }"
+           [(ngModel)]="user.email"
+           #email="ngModel"
+           email
+           required />
+
+    <!-- Errors alert from email -->
+    <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors.required">
+        Email is mandatory fill!
+      </div>
+      <div *ngIf="email.errors.email">
+        Email isn't in the correct format!
+      </div>
+    </div>
+
+    <!-- The label will only be shown to screen readers (visually impaired)-->
+    <label for="inputPassword" class="sr-only"></label>
+    <input type="password" id="inputPassword"
+           name="password" placeholder="Password"
+           class="form-control mb-2"
+           [ngClass]="{
+           'is-invalid': password.invalid && (password.dirty || password.touched),
+           'is-valid': password.valid && (password.dirty || password.touched)
+           }"
+           [(ngModel)]="user.password"
+           #password="ngModel"
+           required />
+
+    <!-- Errors alert from password -->
+    <div class="invalid-feedback mb-2" *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors.required">
+        Password is mandatory fill!
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="login()">Login</button>
+
+    <img src="../../../assets/img/quick-login.jpg" title="Cubes writing buy" />
+
+  </form>
+</div>
+

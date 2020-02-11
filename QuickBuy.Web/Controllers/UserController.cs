@@ -7,6 +7,11 @@ namespace QuickBuy.Web.Controllers
     [Route("api/[Controller]")]
     public class UserController : Controller
     {
+        private readonly IUserRepository _userRepository;
+        public UserController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         [HttpGet]
         public ActionResult Get()
@@ -40,7 +45,9 @@ namespace QuickBuy.Web.Controllers
         {
             try
             {
-                if(user.Email == "nicoly.melo18@outlook.com" && user.Password == "0")
+                var userReturn = _userRepository.Get(user.Email,user.Password);
+
+                if(userReturn != null)
                     return Ok(user);
 
                 return BadRequest("User or password invalid!");

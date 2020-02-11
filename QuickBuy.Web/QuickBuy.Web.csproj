@@ -37,7 +37,6 @@
     <None Remove="ClientApp\src\app\authorization\routes.guard.ts" />
     <None Remove="ClientApp\src\app\model\user.ts" />
     <None Remove="ClientApp\src\app\services\product\product.service.ts" />
-    <None Remove="ClientApp\src\app\services\user\user.service.ts" />
     <None Remove="ClientApp\src\app\user\login\login.component.ts" />
   </ItemGroup>
 

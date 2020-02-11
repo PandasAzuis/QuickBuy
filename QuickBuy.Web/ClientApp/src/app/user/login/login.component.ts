@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public user;
   public returnUrl: string;
   public message: string;
+  private activateSpinner: boolean;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -25,17 +26,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.activateSpinner = true;
 
     this.userService
       .checkUser(this.user)
       .subscribe(
-        data => {
-
-          var userReturn: User;
-          userReturn = data;
-
-          sessionStorage.setItem("authenticated-user", "1");
-          sessionStorage.setItem("user-email", userReturn.email);
+        user_json => {
+          this.userService.user = user_json;
 
           if (this.returnUrl == null) {
              // navigate for initial page 
@@ -47,6 +44,7 @@ export class LoginComponent implements OnInit {
         },
         err => {
           this.message = err.error;
+          this.activateSpinner = false;
         }
       );
 

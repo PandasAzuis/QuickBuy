@@ -1,8 +1,7 @@
-import { Injectable, Inject } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { getBaseUrl } from "../../../main";
- import { User } from "../../model/user";
+import { User } from "../../model/user";
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +10,7 @@ export class UserService {
 
   private baseURL: string;
 
-  constructor(private http: HttpClient, @Inject('BASE URL') baseUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseURL = baseUrl;
   }
 
@@ -20,10 +19,10 @@ export class UserService {
 
     var body = {
       email: user.email,
-      senha: user.password
+      password: user.password
     }
 
-    return this.http.post<User>(this.baseURL + "api/user", body, { headers });
+    return this.http.post<User>(this.baseURL + "api/user/CheckUser", body, { headers });
 
   }
 

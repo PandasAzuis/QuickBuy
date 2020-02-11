@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   public user;
   public returnUrl: string;
+  public message: string;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -30,17 +31,25 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
 
+          var userReturn: User;
+          userReturn = data;
+
+          sessionStorage.setItem("authenticated-user", "1");
+          sessionStorage.setItem("user-email", userReturn.email);
+
+          if (this.returnUrl == null) {
+             // navigate for initial page 
+            this.router.navigate(["/"])
+          } else {
+            // navigate for departure page 
+            this.router.navigate([this.returnUrl]);
+          }
         },
         err => {
-
+          this.message = err.error;
         }
       );
 
-
-    //if (this.user.email == "nicoly.melo18@outlook.com" && this.user.password == "0") {
-    //  sessionStorage.setItem("authenticated-user", "1");
-    //  this.router.navigate([this.returnUrl]);
-    //}
   }
 
 }

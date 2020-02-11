@@ -49,6 +49,11 @@
 
     <button class="btn btn-primary btn-block mb-3" type="submit" (click)="login()">Login</button>
 
+    <!-- Errors alert from login -->
+    <div class="alert alert-danger" *ngIf="message">
+      {{message}}
+    </div>
+
     <img src="../../../assets/img/quick-login.jpg" title="Cubes writing buy" />
 
   </form>

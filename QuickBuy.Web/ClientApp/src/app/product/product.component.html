@@ -1,0 +1,61 @@
+<h1 class="h4 title">Product Register</h1>
+
+<!-- The label will only be shown to screen readers (visually impaired)-->
+<label for="inputName" class="sr-only">Name</label>
+<input type="text" id="inputName"
+       name="nameProduct"
+       placeholder="Product name"
+       class="form-control mb-2 col-md-6"
+       [(ngModel)]="product.name"
+       #name="ngModel"
+       required />
+
+<!-- Errors alert from product name -->
+<div class="invalid-feedback mb-2" *ngIf="name.invalid && (name.dirty || name.touched)">
+  <div *ngIf="name.errors.required">
+    Product name is mandatory fill!
+  </div>
+</div>
+
+<!-- The label will only be shown to screen readers (visually impaired)-->
+<label for="inputDesc" class="sr-only">Description</label>
+<input type="text" id="inputDesc"
+       name="desc"
+       placeholder="Product description"
+       class="form-control mb-2 col-md-6"
+       [(ngModel)]="product.desc"
+       #desc="ngModel"
+       required />
+
+<!-- Errors alert from product description -->
+<div class="invalid-feedback mb-2" *ngIf="desc.invalid && (desc.dirty || desc.touched)">
+  <div *ngIf="desc.errors.required">
+    Product description is mandatory fill!
+  </div>
+</div>
+
+<!-- The label will only be shown to screen readers (visually impaired)-->
+<label for="inputPrice" class="sr-only">Price</label>
+<input type="number" id="inputPrice"
+       name="price"
+       placeholder="Product price"
+       class="form-control mb-2 col-md-2"
+       [(ngModel)]="product.price"
+       #price="ngModel"
+       required />
+
+<!-- Errors alert from product price -->
+<div class="invalid-feedback mb-2" *ngIf="price.invalid && (price.dirty || price.touched)">
+  <div *ngIf="price.errors.required">
+    Product price is mandatory fill!
+  </div>
+</div>
+
+<div class="input-group">
+  <div class="custom-file col-md-6 mb-2">
+    <input type="file" class="custom-file-input" id="inputFile" />
+    <label for="inputFile" class="custom-file-label">Choice one picture for product</label>
+  </div>
+</div>
+
+<button class="btn btn-primary col-md-6" (click)="register()">Register</button>

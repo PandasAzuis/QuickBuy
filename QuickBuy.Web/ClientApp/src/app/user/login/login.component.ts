@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
     this.userService
       .checkUser(this.user)
       .subscribe(
-        user_json => {
-          this.userService.user = user_json;
+        userJson => {
+          this.userService.user = userJson;
 
           if (this.returnUrl == null) {
              // navigate for initial page 

@@ -49,8 +49,12 @@
 
     <button class="btn btn-primary btn-block mb-3" type="submit" (click)="login()" [disabled]="activateSpinner">
       <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="activateSpinner"></span>
-      <span *ngIf="!activateSpinner">Login</span> 
+      <span *ngIf="!activateSpinner">Login</span>
     </button>
+
+    <div>
+      New here?<a [routerLink]='["/register-user"]'> Register</a>
+    </div>
 
     <!-- Errors alert from login -->
     <div class="alert alert-danger" *ngIf="message">
